@@ -1,0 +1,28 @@
+{
+  "name": "saucedemo-e2e-tests",
+  "version": "1.0.0",
+  "description": "E2E Tests for Saucedemo App",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuigiAble/cypress-saucedemo-e2e.git"
+  },
+  "keywords": [
+    "E2E",
+    "QA",
+    "Cypress",
+    "Automation"
+  ],
+  "author": "Luigi Aguirre Charco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuigiAble/cypress-saucedemo-e2e/issues"
+  },
+  "homepage": "https://github.com/LuigiAble/cypress-saucedemo-e2e#readme",
+  "devDependencies": {
+    "cypress": "^12.3.0"
+  }
+}
