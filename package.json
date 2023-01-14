@@ -4,7 +4,9 @@
   "description": "E2E Tests for Saucedemo App",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "cy:e2e:chrome": "cypress run --e2e --browser chrome",
+    "cy:e2e:firefox": "cypress run --e2e --browser firefox"
   },
   "repository": {
     "type": "git",
