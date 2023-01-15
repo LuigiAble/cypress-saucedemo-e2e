@@ -1,5 +1,6 @@
-import { calculateSubTotal } from "../../../utils/formatters";
+import { calculateAmountsToPay } from "../../../utils/formatters";
 import footerPage from "../shared/footerPage";
+import productsInCart from "../../fixtures/productsInCart.json";
 class CartCheckoutOverviewPage {
   elements = {
     subtotalLabel: () =>
@@ -13,17 +14,15 @@ class CartCheckoutOverviewPage {
   }
 
   verifySummaryInfoIsCorrectlyDisplayed() {
+    const { subtotal, taxes, total } = calculateAmountsToPay(productsInCart);
+
     this.elements
       .subtotalLabel()
-      .should("contain.text", `Item total: $${calculateSubTotal().subtotal}`);
+      .should("contain.text", `Item total: $${subtotal}`);
 
-    this.elements
-      .taxLabel()
-      .should("contain.text", `Tax: $${calculateSubTotal().taxes}`);
+    this.elements.taxLabel().should("contain.text", `Tax: $${taxes}`);
 
-    this.elements
-      .totalLabel()
-      .should("contain.text", `Total: $${calculateSubTotal().total}`);
+    this.elements.totalLabel().should("contain.text", `Total: $${total}`);
   }
 }
 

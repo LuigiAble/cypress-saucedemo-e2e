@@ -1,11 +1,9 @@
-import productsInCart from "../cypress/fixtures/productsInCart.json";
-
 export const replaceStringWithDashes = (stringToReplace) =>
   stringToReplace.replace(/\s+/g, "-").toLowerCase();
 
 export const roundTwoDecimals = (amount) => Math.round(amount * 100) / 100;
 
-export const calculateSubTotal = () => {
+export const calculateAmountsToPay = (productsInCart) => {
   const subtotal = productsInCart.products
     .filter((prod) => !productsInCart.removedProducts.includes(prod.title))
     .map(({ price }) => price)
