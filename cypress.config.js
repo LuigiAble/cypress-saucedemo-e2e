@@ -28,7 +28,7 @@ module.exports = defineConfig({
       require("cypress-mochawesome-reporter/plugin")(on);
     },
     baseUrl: "https://www.saucedemo.com",
-    // testIsolation: false,
+    testIsolation: false,
   },
   env: {
     username: "standard_user",
