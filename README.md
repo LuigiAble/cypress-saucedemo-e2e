@@ -1,8 +1,8 @@
 # Cypress E2E Testing and Postman API Testing
 
-[![Cypress E2E tests](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_e2e.yml/badge.svg?event=check_suite)](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_e2e.yml)
+[![Cypress E2E tests](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_e2e.yml/badge.svg)](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_e2e.yml)
 
-[![Postman API Tests](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_api.yml/badge.svg?event=check_suite)](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_api.yml)
+[![Postman API Tests](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_api.yml/badge.svg)](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_api.yml)
 
 ## Getting Started
 
