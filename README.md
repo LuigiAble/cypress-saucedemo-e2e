@@ -39,8 +39,6 @@ Before starting to run the test:
    npm install
    ```
 
-<!-- RUNNING TESTS --> 🚀
-
 ## Running tests 🚀
 
 In order to run the tests, you can use the following commands:
