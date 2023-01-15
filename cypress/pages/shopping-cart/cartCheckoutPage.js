@@ -4,7 +4,6 @@ class CartCheckoutOverviewPage {
     firstnameInput: () => cy.getByDataTestId("firstName"),
     lastnameInput: () => cy.getByDataTestId("lastName"),
     postalCodeInput: () => cy.getByDataTestId("postalCode"),
-    errorMessage: () => cy.getByDataTestId("error"),
   };
 
   completeCheckoutInformation(user) {
