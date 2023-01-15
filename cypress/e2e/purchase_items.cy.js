@@ -61,4 +61,8 @@ describe("The user makes purchases of items through the Saucedemo App", () => {
       SUCCESS_MESSAGE.description
     );
   });
+
+  // after(() => {
+  //   cy.logout();
+  // });
 });

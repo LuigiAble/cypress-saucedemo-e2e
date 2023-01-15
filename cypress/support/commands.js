@@ -20,3 +20,9 @@ Cypress.Commands.add("loginViaUi", (user) => {
 Cypress.Commands.add("getByDataTestId", (selector, ...args) => {
   return cy.get(`[data-test=${selector}]`, ...args);
 });
+
+Cypress.Commands.add("logout", () => {
+  cy.clearCookie("session-username");
+  cy.visit("/");
+  cy.getCookie("session-username").should("not.exist");
+});

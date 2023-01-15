@@ -9,20 +9,26 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   defaultCommandTimeout: 10000,
   retries: {
-    // Configure retry attempts for `cypress run`
-    // Default is 0
     runMode: 2,
-    // Configure retry attempts for `cypress open`
-    // Default is 0
     openMode: 0,
+  },
+  reporter: "cypress-mochawesome-reporter",
+  video: false,
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: "Cypress Saucedemo Report",
+    embeddedScreenshots: true,
+    inlineAssets: true, //Adds the asserts inline
+    saveAllAttempts: false,
   },
   // E2E section: Options that are applicable only for e2e tests
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      require("cypress-mochawesome-reporter/plugin")(on);
     },
     baseUrl: "https://www.saucedemo.com",
-    testIsolation: false,
+    // testIsolation: false,
   },
   env: {
     username: "standard_user",

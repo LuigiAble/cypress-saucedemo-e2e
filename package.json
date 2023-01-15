@@ -25,6 +25,9 @@
   },
   "homepage": "https://github.com/LuigiAble/cypress-saucedemo-e2e#readme",
   "devDependencies": {
-    "cypress": "^12.3.0"
+    "cypress": "^12.3.0",
+    "cypress-mochawesome-reporter": "^3.2.3",
+    "i": "^0.3.7",
+    "npm": "^9.3.0"
   }
 }
