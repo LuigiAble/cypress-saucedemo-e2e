@@ -4,6 +4,10 @@
 
 [![Postman API Tests](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_api.yml/badge.svg)](https://github.com/LuigiAble/cypress-saucedemo-e2e/actions/workflows/main_api.yml)
 
+
+## Demo
+https://user-images.githubusercontent.com/41165417/212573580-080db1dc-3430-4833-9be0-ea1896a95618.mov
+
 ## Getting Started
 
 This project implements some tests to the following applications.
