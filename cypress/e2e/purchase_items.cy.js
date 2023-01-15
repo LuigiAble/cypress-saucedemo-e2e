@@ -6,13 +6,17 @@ import cartCheckoutCompletePage from "../pages/shopping-cart/cartCheckoutComplet
 import cartCheckoutOverviewPage from "../pages/shopping-cart/cartCheckoutOverviewPage";
 import cartCheckoutPage from "../pages/shopping-cart/cartCheckoutPage";
 import cartPage from "../pages/shopping-cart/cartPage";
-import {
-  PAGE_TITLES,
-  PRODUCT_SORT_OPTIONS,
-  SUCCESS_MESSAGE,
-} from "./constants/constants";
+import { PAGE_TITLES, PRODUCT_SORT_OPTIONS } from "./constants/constants";
 import ProductsList from "../fixtures/productsInCart.json";
-import CheckoutInfo from "../fixtures/checkoutInfo.json";
+
+const {
+  products,
+  addedProducts,
+  remainingProducts,
+  removedProducts,
+  userInfo,
+  success_message: SUCCESS_MESSAGE,
+} = ProductsList;
 
 describe("The user makes purchases of items through the Saucedemo App", () => {
   before(() => {
@@ -25,22 +29,22 @@ describe("The user makes purchases of items through the Saucedemo App", () => {
   it("should select products from the list", () => {
     headerPage.verifyTitleIsDisplayed(PAGE_TITLES.products);
     productsPage.sortProductsBy(PRODUCT_SORT_OPTIONS.highToLow);
-    productsPage.selectProducts(ProductsList.products);
-    productsPage.verifyCartBadgeItems(ProductsList.addedProducts);
+    productsPage.selectProducts(products);
+    productsPage.verifyCartBadgeItems(addedProducts);
     productsPage.navigateToCartPage();
   });
 
   it("should check and modify added items", () => {
     headerPage.verifyTitleIsDisplayed(PAGE_TITLES.myCart);
-    cartPage.verifyItemsAddedAreDisplayed(ProductsList.addedProducts);
-    cartPage.updateCartOfItems(ProductsList.removedProducts);
-    cartPage.verifyItemsAddedAreDisplayed(ProductsList.remainingProducts);
+    cartPage.verifyItemsAddedAreDisplayed(addedProducts);
+    cartPage.updateCartOfItems(removedProducts);
+    cartPage.verifyItemsAddedAreDisplayed(remainingProducts);
     cartPage.clickOnCheckout();
   });
 
   it("should complete checkout user information", () => {
     headerPage.verifyTitleIsDisplayed(PAGE_TITLES.stepOne);
-    cartCheckoutPage.completeCheckoutInformation(CheckoutInfo);
+    cartCheckoutPage.completeCheckoutInformation(userInfo);
     cartCheckoutPage.clickOnContinue();
   });
 
