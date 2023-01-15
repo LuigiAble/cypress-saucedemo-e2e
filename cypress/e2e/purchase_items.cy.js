@@ -17,10 +17,10 @@ describe("The user makes purchases of items through the Saucedemo App", () => {
 
   it("should select products from the list", () => {
     headerPage.verifyTitleIsDisplayed("Products");
-    headerPage.sortProductsBy(PRODUCT_SORT_OPTIONS.highToLow);
+    productsPage.sortProductsBy(PRODUCT_SORT_OPTIONS.highToLow);
     productsPage.selectProducts();
-    headerPage.verifyCartBadgeItems(1);
-    headerPage.navigateToCartPage();
+    productsPage.verifyCartBadgeItems(1);
+    productsPage.navigateToCartPage();
   });
 
   it("should check and modify added items", () => {

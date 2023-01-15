@@ -6,23 +6,6 @@ class HeaderPage {
       cy.get("#shopping_cart_container .shopping_cart_link"),
   };
 
-  sortProductsBy(sortBy) {
-    this.elements.shoppingCartSort().select(sortBy);
-  }
-
-  verifyCartBadgeItems(quantityOfItems) {
-    this.elements
-      .shoppingCartBadge()
-      .as("CartBadge")
-      .then((quantity) => {
-        cy.wrap(quantity).should("have.text", quantityOfItems);
-      });
-  }
-
-  navigateToCartPage() {
-    cy.get("@CartBadge").click();
-  }
-
   verifyTitleIsDisplayed(title) {
     this.elements.headerTitle().should("have.text", title);
   }

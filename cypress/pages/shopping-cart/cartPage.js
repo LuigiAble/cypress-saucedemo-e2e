@@ -1,3 +1,4 @@
+import footerPage from "../shared/footerPage";
 class CartPage {
   elements = {
     cartQuantityLabel: () =>
@@ -6,7 +7,6 @@ class CartPage {
       cy.get("#cart_contents_container .cart_desc_label"),
     cartAddedItem: () => cy.get("#cart_contents_container .cart_item"),
     remove_item_button: (product) => cy.get(`[data-test='remove-${product}']`), // remove
-    cartCheckoutButton: () => cy.get("[data-test='checkout']"),
   };
 
   verifyItemsAddedAreDisplayed(items) {
@@ -14,7 +14,7 @@ class CartPage {
   }
 
   clickOnCheckout() {
-    this.elements.cartCheckoutButton().should("be.enabled").click();
+    footerPage.elements.cartCheckoutButton().should("be.enabled").click();
   }
 }
 

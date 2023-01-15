@@ -1,3 +1,4 @@
+import headerPage from "./shared/headerPage";
 class ProductsPage {
   elements = {
     add_item_button: (product) =>
@@ -11,6 +12,23 @@ class ProductsPage {
       .add_item_button("sauce-labs-backpack")
       .should("be.enabled")
       .click();
+  }
+
+  sortProductsBy(sortBy) {
+    headerPage.elements.shoppingCartSort().select(sortBy);
+  }
+
+  verifyCartBadgeItems(quantityOfItems) {
+    headerPage.elements
+      .shoppingCartBadge()
+      .as("CartBadge")
+      .then((quantity) => {
+        cy.wrap(quantity).should("have.text", quantityOfItems);
+      });
+  }
+
+  navigateToCartPage() {
+    cy.get("@CartBadge").click();
   }
 }
 
