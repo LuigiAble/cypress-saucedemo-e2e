@@ -98,7 +98,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "{{token}}",
+						"value": "{{auth_token}}",
 						"type": "text"
 					},
 					{
@@ -150,7 +150,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "{{token}}",
+						"value": "{{auth_token}}",
 						"type": "text"
 					},
 					{
@@ -201,7 +201,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "{{token}}",
+						"value": "{{auth_token}}",
 						"type": "text"
 					},
 					{
@@ -267,21 +267,7 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"// window = {};",
-					"",
-					"// pm.sendRequest(\"https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js\", (error, response) => {",
-					"//     if (error || response.code !== 200) {",
-					"//         pm.expect.fail('Could not load external library');",
-					"//     }",
-					"",
-					"//     eval(response.text());",
-					"",
-					"//     // This is where you can set the locale. See faker.js docs for all available locales.",
-					"//     // window.faker.locale=\"fr\";",
-					"//     pm.collectionVariables.set(\"name\", window.faker.name.firstName() + \" \" + window.faker.name.lastName());",
-					"//     pm.collectionVariables.set(\"phoneNumber\",window.faker.phone.phoneNumber());",
-					"//     pm.collectionVariables.set(\"streetAddress\",window.faker.address.streetAddress());",
-					"// });"
+					"pm.environment.set(\"auth_token\", \"Bearer 5b4b31c1ce22a949fcbead5b0ad488a26a0e7dd5e04c43b21b62ba331bc435cf\");"
 				]
 			}
 		},
@@ -297,16 +283,17 @@
 	],
 	"variable": [
 		{
-			"key": "token",
-			"value": "Bearer 2e0883ae405f5d4a1a0775654c41746de9b57ca7d302b30fd5dd658b3c3a52fc"
-		},
-		{
 			"key": "user_id",
 			"value": ""
 		},
 		{
 			"key": "post_id",
 			"value": ""
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
