@@ -9,10 +9,14 @@ import cartCheckoutPage from "../pages/shopping-cart/cartCheckoutPage";
 import cartPage from "../pages/shopping-cart/cartPage";
 import { PRODUCT_SORT_OPTIONS } from "./constants/constants";
 
+const user = {
+  username: Cypress.env("username"),
+  password: Cypress.env("password"),
+};
+
 describe("The user makes purchases of items through the Saucedemo App", () => {
   before(() => {
-    cy.visit("/");
-    loginPage.login("standard_user", "secret_sauce");
+    cy.loginViaUi(user);
   });
 
   it("should select products from the list", () => {

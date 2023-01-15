@@ -24,4 +24,8 @@ module.exports = defineConfig({
     baseUrl: "https://www.saucedemo.com",
     testIsolation: false,
   },
+  env: {
+    username: "standard_user",
+    password: "secret_sauce",
+  },
 });
