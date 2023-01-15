@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "f7a4560a-32be-4daf-8938-cbdc790a11b2",
+		"name": "Resources",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2339414"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response has status code is 200 and its a json\", function () {",
+							"     pm.expect(pm.response.code).to.eql(200);",
+							"     pm.expect(pm.response).to.be.ok",
+							"     pm.expect(pm.response).to.be.json",
+							"});",
+							"",
+							"// Get first user_id from response to be used in the other tests",
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(\"jsonData.user_id\", jsonData[0].user_id)",
+							"pm.collectionVariables.set(\"user_id\", jsonData[0].user_id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gorest-host}}/posts",
+					"host": [
+						"{{gorest-host}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.expect(pm.response.code).to.eql(201);",
+							"});",
+							"",
+							"pm.test(\"Response body contains the correct structure\", function () {",
+							"    var response = pm.response.json()",
+							"    pm.expect(response).to.have.property('id');",
+							"    pm.expect(response).to.have.property('user_id');",
+							"    pm.expect(response).to.have.property('title');",
+							"    pm.expect(response).to.have.property('body');",
+							"})",
+							"",
+							"// Get post_id from response to be used in the other tests",
+							"var jsonData = JSON.parse(responseBody);",
+							"console.log(\"jsonData.id\", jsonData.id)",
+							"pm.collectionVariables.set(\"post_id\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": {{user_id}},\n    \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n    \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gorest-host}}/posts",
+					"host": [
+						"{{gorest-host}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response has status code is 200 and its a json\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"dolorem dolore est ipsam\",\n    \"body\": \"dignissimos aperiam dolorem qui eum\\nfacilis quibusdam animi sint suscipit qui sint possimus cum\\nquaerat magni maiores excepturi\\nipsam ut commodi dolor voluptatum modi aut vitae\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gorest-host}}/posts/{{post_id}}",
+					"host": [
+						"{{gorest-host}}"
+					],
+					"path": [
+						"posts",
+						"{{post_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.expect(pm.response.code).to.eql(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{gorest-host}}/posts/{{post_id}}",
+					"host": [
+						"{{gorest-host}}"
+					],
+					"path": [
+						"posts",
+						"{{post_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by iD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.expect(pm.response.code).to.eql(404);",
+							"    pm.expect(pm.response).to.be.notFound",
+							"});",
+							"",
+							"pm.test(\"Response body contains the correct response\", function () {",
+							"    var response = pm.response.json();",
+							"    pm.expect(response.message).to.eql(\"Resource not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gorest-host}}/posts/{{post_id}}",
+					"host": [
+						"{{gorest-host}}"
+					],
+					"path": [
+						"posts",
+						"{{post_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// window = {};",
+					"",
+					"// pm.sendRequest(\"https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js\", (error, response) => {",
+					"//     if (error || response.code !== 200) {",
+					"//         pm.expect.fail('Could not load external library');",
+					"//     }",
+					"",
+					"//     eval(response.text());",
+					"",
+					"//     // This is where you can set the locale. See faker.js docs for all available locales.",
+					"//     // window.faker.locale=\"fr\";",
+					"//     pm.collectionVariables.set(\"name\", window.faker.name.firstName() + \" \" + window.faker.name.lastName());",
+					"//     pm.collectionVariables.set(\"phoneNumber\",window.faker.phone.phoneNumber());",
+					"//     pm.collectionVariables.set(\"streetAddress\",window.faker.address.streetAddress());",
+					"// });"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "Bearer 2e0883ae405f5d4a1a0775654c41746de9b57ca7d302b30fd5dd658b3c3a52fc"
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		},
+		{
+			"key": "post_id",
+			"value": ""
+		}
+	]
+}
