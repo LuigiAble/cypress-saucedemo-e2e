@@ -1,6 +1,5 @@
 /// <reference types="Cypress" />
 
-import loginPage from "../pages/loginPage";
 import productsPage from "../pages/productsPage";
 import headerPage from "../pages/shared/headerPage";
 import cartCheckoutCompletePage from "../pages/shopping-cart/cartCheckoutCompletePage";
