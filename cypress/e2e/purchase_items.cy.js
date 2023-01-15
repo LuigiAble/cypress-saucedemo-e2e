@@ -6,50 +6,55 @@ import cartCheckoutCompletePage from "../pages/shopping-cart/cartCheckoutComplet
 import cartCheckoutOverviewPage from "../pages/shopping-cart/cartCheckoutOverviewPage";
 import cartCheckoutPage from "../pages/shopping-cart/cartCheckoutPage";
 import cartPage from "../pages/shopping-cart/cartPage";
-import { PRODUCT_SORT_OPTIONS } from "./constants/constants";
-
-const user = {
-  username: Cypress.env("username"),
-  password: Cypress.env("password"),
-};
+import {
+  PAGE_TITLES,
+  PRODUCT_SORT_OPTIONS,
+  SUCCESS_MESSAGE,
+} from "./constants/constants";
+import ProductsList from "../fixtures/productsInCart.json";
+import CheckoutInfo from "../fixtures/checkoutInfo.json";
 
 describe("The user makes purchases of items through the Saucedemo App", () => {
   before(() => {
-    cy.loginViaUi(user);
+    cy.loginViaUi({
+      username: Cypress.env("username"),
+      password: Cypress.env("password"),
+    });
   });
 
   it("should select products from the list", () => {
-    headerPage.verifyTitleIsDisplayed("Products");
+    headerPage.verifyTitleIsDisplayed(PAGE_TITLES.products);
     productsPage.sortProductsBy(PRODUCT_SORT_OPTIONS.highToLow);
-    productsPage.selectProducts();
-    productsPage.verifyCartBadgeItems(1);
+    productsPage.selectProducts(ProductsList.products);
+    productsPage.verifyCartBadgeItems(ProductsList.addedProducts);
     productsPage.navigateToCartPage();
   });
 
   it("should check and modify added items", () => {
-    headerPage.verifyTitleIsDisplayed("Your Cart");
-    cartPage.verifyItemsAddedAreDisplayed(1);
+    headerPage.verifyTitleIsDisplayed(PAGE_TITLES.myCart);
+    cartPage.verifyItemsAddedAreDisplayed(ProductsList.addedProducts);
+    cartPage.updateCartOfItems(ProductsList.removedProducts);
+    cartPage.verifyItemsAddedAreDisplayed(ProductsList.remainingProducts);
     cartPage.clickOnCheckout();
   });
 
   it("should complete checkout user information", () => {
-    headerPage.verifyTitleIsDisplayed("Checkout: Your Information");
-    cartCheckoutPage.completeCheckoutInformation("Test", "Ing", 12345);
+    headerPage.verifyTitleIsDisplayed(PAGE_TITLES.stepOne);
+    cartCheckoutPage.completeCheckoutInformation(CheckoutInfo);
     cartCheckoutPage.clickOnContinue();
   });
 
   it("should review purchase details: subtotal, taxes, and price before confirm", () => {
-    headerPage.verifyTitleIsDisplayed("Checkout: Overview");
+    headerPage.verifyTitleIsDisplayed(PAGE_TITLES.stepTwo);
+    cartCheckoutOverviewPage.verifySummaryInfoIsCorrectlyDisplayed();
     cartCheckoutOverviewPage.clickOnFinish();
   });
 
   it("should confirm that purchase was successfull", () => {
-    headerPage.verifyTitleIsDisplayed("Checkout: Complete!");
-    cartCheckoutCompletePage.verifyThankyouHeaderIsDisplayed(
-      "THANK YOU FOR YOUR ORDER"
-    );
-    cartCheckoutCompletePage.verifyThankyouMessageIsDisplayed(
-      "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+    headerPage.verifyTitleIsDisplayed(PAGE_TITLES.complete);
+    cartCheckoutCompletePage.verifyHeaderIsDisplayed(SUCCESS_MESSAGE.header);
+    cartCheckoutCompletePage.verifyMessageIsDisplayed(
+      SUCCESS_MESSAGE.description
     );
   });
 });
