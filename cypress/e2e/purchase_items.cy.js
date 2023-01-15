@@ -10,34 +10,37 @@ import cartPage from "../pages/shopping-cart/cartPage";
 import { PRODUCT_SORT_OPTIONS } from "./constants/constants";
 
 describe("The user makes purchases of items through the Saucedemo App", () => {
-  it("should log in successfully", () => {
+  before(() => {
     cy.visit("/");
     loginPage.login("standard_user", "secret_sauce");
+  });
 
-    // 1. List of items
+  it("should select products from the list", () => {
     headerPage.verifyTitleIsDisplayed("Products");
     headerPage.sortProductsBy(PRODUCT_SORT_OPTIONS.highToLow);
     productsPage.selectProducts();
-    // cy.get(".inventory_item #item_4_img_link img").should("be.visible");
     headerPage.verifyCartBadgeItems(1);
     headerPage.navigateToCartPage();
+  });
 
-    // 2. User Cart
+  it("should check and modify added items", () => {
     headerPage.verifyTitleIsDisplayed("Your Cart");
     cartPage.verifyItemsAddedAreDisplayed(1);
     cartPage.clickOnCheckout();
+  });
 
-    // 3. User Checkout
+  it("should complete checkout user information", () => {
     headerPage.verifyTitleIsDisplayed("Checkout: Your Information");
-
     cartCheckoutPage.completeCheckoutInformation("Test", "Ing", 12345);
     cartCheckoutPage.clickOnContinue();
+  });
 
-    // 4. User Checkout Overview
+  it("should review purchase details: subtotal, taxes, and price before confirm", () => {
     headerPage.verifyTitleIsDisplayed("Checkout: Overview");
     cartCheckoutOverviewPage.clickOnFinish();
+  });
 
-    // 5. User Checkout Complete
+  it("should confirm that purchase was successfull", () => {
     headerPage.verifyTitleIsDisplayed("Checkout: Complete!");
     cartCheckoutCompletePage.verifyThankyouHeaderIsDisplayed(
       "THANK YOU FOR YOUR ORDER"

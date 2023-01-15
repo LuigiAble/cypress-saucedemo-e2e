@@ -1,4 +1,4 @@
-class UserCartPage {
+class CartPage {
   elements = {
     cartQuantityLabel: () =>
       cy.get("#cart_contents_container .cart_quantity_label"),
@@ -18,4 +18,4 @@ class UserCartPage {
   }
 }
 
-module.exports = new UserCartPage();
+module.exports = new CartPage();
