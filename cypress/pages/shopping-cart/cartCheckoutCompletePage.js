@@ -9,11 +9,11 @@ class CartCheckoutCompletePage {
     backToProductsButton: () => cy.get("[data-test='back-to-products']"),
   };
 
-  verifyThankyouHeaderIsDisplayed(header) {
+  verifyHeaderIsDisplayed(header) {
     this.elements.completeHeader().should("have.text", header);
   }
 
-  verifyThankyouMessageIsDisplayed(message) {
+  verifyMessageIsDisplayed(message) {
     this.elements.completeSubHeader().should("have.text", message);
   }
 }

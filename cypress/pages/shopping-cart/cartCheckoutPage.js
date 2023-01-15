@@ -7,10 +7,10 @@ class CartCheckoutOverviewPage {
     errorMessage: () => cy.get(".error-message-container [data-test='error']"),
   };
 
-  completeCheckoutInformation(firstname, lastname, postalCode) {
-    this.elements.firstnameInput().type(firstname);
-    this.elements.lastnameInput().type(lastname);
-    this.elements.postalCodeInput().type(postalCode);
+  completeCheckoutInformation(user) {
+    this.elements.firstnameInput().type(user.firstname);
+    this.elements.lastnameInput().type(user.lastname);
+    this.elements.postalCodeInput().type(user.postalCode);
   }
 
   clickOnContinue() {

@@ -1,17 +1,22 @@
+import { replaceStringWithDashes } from "../../utils/formatters";
 import headerPage from "./shared/headerPage";
 class ProductsPage {
   elements = {
     add_item_button: (product) =>
       cy.get(`[data-test='add-to-cart-${product}']`),
-    remove_item_button: (product) => cy.get(`[data-test='remove-${product}']`),
     product_details: () => cy.get("#inventory_container .inventory_item"),
   };
 
-  selectProducts() {
-    this.elements
-      .add_item_button("sauce-labs-backpack")
-      .should("be.enabled")
-      .click();
+  selectProducts(products) {
+    cy.wrap(products).each((product) => {
+      this.elements
+        .product_details()
+        .should("contain.text", product.description);
+      this.elements
+        .add_item_button(replaceStringWithDashes(product.title))
+        .should("be.enabled")
+        .click();
+    });
   }
 
   sortProductsBy(sortBy) {
