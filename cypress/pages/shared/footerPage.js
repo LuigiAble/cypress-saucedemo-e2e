@@ -1,9 +1,9 @@
 class FooterPage {
   elements = {
-    cartContinueShoppingButton: () => cy.get("[data-test='continue-shopping']"),
-    cartCheckoutButton: () => cy.get("[data-test='checkout']"),
-    cartContinueButton: () => cy.get("[data-test='continue']"),
-    cartCompletePurchase: () => cy.get("[data-test='finish']"),
+    cartContinueShoppingButton: () => cy.getByDataTestId("continue-shopping"),
+    cartCheckoutButton: () => cy.getByDataTestId("checkout"),
+    cartContinueButton: () => cy.getByDataTestId("continue"),
+    cartCompletePurchase: () => cy.getByDataTestId("finish"),
   };
 }
 

@@ -1,10 +1,10 @@
 import footerPage from "../shared/footerPage";
 class CartCheckoutOverviewPage {
   elements = {
-    firstnameInput: () => cy.get("[data-test='firstName']"),
-    lastnameInput: () => cy.get("[data-test='lastName']"),
-    postalCodeInput: () => cy.get("[data-test='postalCode']"),
-    errorMessage: () => cy.get(".error-message-container [data-test='error']"),
+    firstnameInput: () => cy.getByDataTestId("firstName"),
+    lastnameInput: () => cy.getByDataTestId("lastName"),
+    postalCodeInput: () => cy.getByDataTestId("postalCode"),
+    errorMessage: () => cy.getByDataTestId("error"),
   };
 
   completeCheckoutInformation(user) {

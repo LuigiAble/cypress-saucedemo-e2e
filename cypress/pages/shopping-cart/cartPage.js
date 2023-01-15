@@ -2,8 +2,8 @@ import { replaceStringWithDashes } from "../../../utils/formatters";
 import footerPage from "../shared/footerPage";
 class CartPage {
   elements = {
-    cartAddedItem: () => cy.get("#cart_contents_container .cart_item"),
-    remove_item_button: (product) => cy.get(`[data-test='remove-${product}']`), // remove
+    cartAddedItem: () => cy.get("#cart_contents_container").find(".cart_item"),
+    remove_item_button: (product) => cy.getByDataTestId(`'remove-${product}'`),
   };
 
   updateCartOfItems(products) {

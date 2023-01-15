@@ -3,8 +3,9 @@ import headerPage from "./shared/headerPage";
 class ProductsPage {
   elements = {
     add_item_button: (product) =>
-      cy.get(`[data-test='add-to-cart-${product}']`),
-    product_details: () => cy.get("#inventory_container .inventory_item"),
+      cy.getByDataTestId(`'add-to-cart-${product}'`),
+    product_details: () =>
+      cy.get("#inventory_container").find(".inventory_item"),
   };
 
   selectProducts(products) {

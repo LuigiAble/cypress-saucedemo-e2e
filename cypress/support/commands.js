@@ -4,9 +4,9 @@ Cypress.Commands.add("loginViaUi", (user) => {
     () => {
       cy.visit("/");
       cy.title().should("eq", "Swag Labs");
-      cy.get("[data-test='username']").type(user.username);
-      cy.get("[data-test='password']").type(user.password);
-      cy.get("[data-test='login-button']").should("be.enabled").click();
+      cy.getByDataTestId("username").type(user.username);
+      cy.getByDataTestId("password").type(user.password);
+      cy.getByDataTestId("login-button").should("be.enabled").click();
     },
     {
       validate: () => {
@@ -15,4 +15,8 @@ Cypress.Commands.add("loginViaUi", (user) => {
       },
     }
   );
+});
+
+Cypress.Commands.add("getByDataTestId", (selector, ...args) => {
+  return cy.get(`[data-test=${selector}]`, ...args);
 });

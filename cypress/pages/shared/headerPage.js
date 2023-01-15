@@ -1,9 +1,9 @@
 class HeaderPage {
   elements = {
-    headerTitle: () => cy.get(".header_secondary_container .title"),
-    shoppingCartSort: () => cy.get("[data-test='product_sort_container']"),
+    headerTitle: () => cy.get(".header_secondary_container").find(".title"),
+    shoppingCartSort: () => cy.getByDataTestId("product_sort_container"),
     shoppingCartBadge: () =>
-      cy.get("#shopping_cart_container .shopping_cart_link"),
+      cy.get("#shopping_cart_container").find(".shopping_cart_link"),
   };
 
   verifyTitleIsDisplayed(title) {
