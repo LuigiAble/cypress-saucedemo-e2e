@@ -6,10 +6,15 @@ class CartPage {
     remove_item_button: (product) => cy.getByDataTestId(`'remove-${product}'`),
   };
 
+  getProductsToBeRemoved = (products) => {
+    return products.filter((p) => p.status === "removed");
+  };
+
   updateCartOfItems(products) {
-    cy.wrap(products).each((product) => {
+    const productsToRemoveFromCart = this.getProductsToBeRemoved(products);
+    cy.wrap(productsToRemoveFromCart).each((product) => {
       this.elements
-        .remove_item_button(replaceStringWithDashes(product))
+        .remove_item_button(replaceStringWithDashes(product.title))
         .click();
     });
   }
