@@ -9,14 +9,10 @@ import cartPage from "../pages/shopping-cart/cartPage";
 import { PAGE_TITLES, PRODUCT_SORT_OPTIONS } from "./constants/constants";
 import ProductsList from "../fixtures/productsInCart.json";
 
-const {
-  products,
-  addedProducts,
-  remainingProducts,
-  removedProducts,
-  userInfo,
-  success_message: SUCCESS_MESSAGE,
-} = ProductsList;
+const { products, userInfo, success_message: SUCCESS_MESSAGE } = ProductsList;
+const countProductsInCart = products.length;
+const countProductsToDelete = cartPage.getProductsToBeRemoved(products).length;
+const countItemsInUpdatedCart = countProductsInCart - countProductsToDelete;
 
 describe("The user makes purchases of items through the Saucedemo App", () => {
   before(() => {
@@ -30,15 +26,15 @@ describe("The user makes purchases of items through the Saucedemo App", () => {
     headerPage.verifyTitleIsDisplayed(PAGE_TITLES.products);
     productsPage.sortProductsBy(PRODUCT_SORT_OPTIONS.highToLow);
     productsPage.selectProducts(products);
-    productsPage.verifyCartBadgeItems(addedProducts);
+    productsPage.verifyCartBadgeItems(countProductsInCart);
     productsPage.navigateToCartPage();
   });
 
   it("should check and modify added items", () => {
     headerPage.verifyTitleIsDisplayed(PAGE_TITLES.myCart);
-    cartPage.verifyItemsAddedAreDisplayed(addedProducts);
-    cartPage.updateCartOfItems(removedProducts);
-    cartPage.verifyItemsAddedAreDisplayed(remainingProducts);
+    cartPage.verifyItemsAddedAreDisplayed(countProductsInCart);
+    cartPage.updateCartOfItems(products);
+    cartPage.verifyItemsAddedAreDisplayed(countItemsInUpdatedCart);
     cartPage.clickOnCheckout();
   });
 
